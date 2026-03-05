@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PeakPerform India – Digital Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --saffron: #FF6B2B;
+    --saffron-light: #FF8C55;
+    --saffron-dark: #E85520;
+    --blue: #0A1931;
+    --blue-mid: #1A3A6B;
+    --blue-accent: #1E5FBB;
+    --gold: #F5A623;
+    --white: #FFFFFF;
+    --off-white: #FFF9F5;
+    --gray-light: #F4F6FB;
+    --gray: #8A95A5;
+    --text: #1A1A2E;
+    --text-light: #5A6070;
+    --shadow: 0 8px 40px rgba(10,25,49,0.12);
+    --shadow-card: 0 4px 24px rgba(10,25,49,0.08);
+    --radius: 16px;
+    --radius-sm: 8px;
+    --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'Poppins', 'Hind', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--gray-light); }
+  ::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 3px; }
+
+  /* ── NAV ── */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    transition: var(--transition);
+    background: transparent;
+  }
+  #navbar.scrolled {
+    background: rgba(10,25,49,0.97);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    height: 64px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 900; color: white;
+    flex-shrink: 0;
+  }
+  .logo-text { line-height: 1.15; }
+  .logo-text span:first-child { display: block; font-size: 1rem; font-weight: 800; color: white; letter-spacing: -0.3px; }
+  .logo-text span:last-child { display: block; font-size: 0.65rem; font-weight: 500; color: var(--saffron-light); letter-spacing: 1.5px; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: var(--transition); position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--saffron); border-radius: 2px; transition: var(--transition); }
+  .nav-links a:hover { color: white; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { background: var(--saffron); color: white !important; padding: 10px 22px; border-radius: 50px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--saffron-dark) !important; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,107,43,0.4); }
+  .nav-cta::after { display: none !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 26px; height: 2px; background: white; border-radius: 2px; transition: var(--transition); }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: rgba(10,25,49,0.98); backdrop-filter: blur(16px);
+    flex-direction: column; padding: 2rem 5%; gap: 1.5rem;
+    z-index: 999; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 1rem; font-weight: 500; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 60%, #0E2A4A 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+  }
+  .hero-glow {
+    position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,107,43,0.18) 0%, transparent 70%);
+    top: -100px; right: -100px; border-radius: 50%;
+    animation: pulse 5s ease-in-out infinite;
+  }
+  .hero-glow2 {
+    position: absolute; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(30,95,187,0.25) 0%, transparent 70%);
+    bottom: -100px; left: -50px; border-radius: 50%;
+    animation: pulse 7s ease-in-out infinite reverse;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1) opacity: 1} 50%{transform:scale(1.1);} }
+  .hero-container {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 120px 5% 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,107,43,0.15); border: 1px solid rgba(255,107,43,0.4);
+    color: var(--saffron-light); padding: 6px 16px; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    margin-bottom: 1.5rem; width: fit-content;
+  }
+  .hero-badge i { font-size: 0.75rem; }
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 900; color: white; line-height: 1.12;
+    letter-spacing: -1px; margin-bottom: 1.5rem;
+  }
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-desc {
+    color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.75;
+    margin-bottom: 2.5rem; font-family: 'Hind', sans-serif;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+    color: white; padding: 14px 32px; border-radius: 50px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    box-shadow: 0 8px 30px rgba(255,107,43,0.4);
+    transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,43,0.5); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.25); padding: 14px 32px;
+    border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .stat-item { text-align: left; }
+  .stat-num { font-size: 1.8rem; font-weight: 900; color: white; line-height: 1; }
+  .stat-num span { color: var(--saffron); }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); margin-top: 4px; font-family: 'Hind'; }
+  .hero-visual {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .hero-card-main {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 24px; padding: 2rem;
+    width: 100%; max-width: 380px;
+    position: relative;
+  }
+  .metric-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .metric-label { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-family: 'Hind'; }
+  .metric-value { color: white; font-weight: 700; font-size: 1.1rem; }
+  .metric-change { color: #4ade80; font-size: 0.78rem; font-weight: 600; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin: 1rem 0; }
+  .bar { flex: 1; border-radius: 6px 6px 0 0; background: linear-gradient(to top, var(--saffron-dark), var(--saffron)); opacity: 0.85; transition: opacity 0.3s; cursor: pointer; }
+  .bar:hover { opacity: 1; }
+  .bar.blue { background: linear-gradient(to top, var(--blue-accent), #4A8FE0); }
+  .floating-tag {
+    position: absolute; background: white; border-radius: 12px;
+    padding: 10px 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 600; color: var(--text);
+    animation: float 3s ease-in-out infinite;
+  }
+  .floating-tag.t1 { top: -20px; right: -20px; animation-delay: 0s; }
+  .floating-tag.t2 { bottom: -20px; left: -20px; animation-delay: 1.5s; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .tag-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 90px 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    display: inline-block; background: rgba(255,107,43,0.1); color: var(--saffron);
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 1rem;
+    border: 1px solid rgba(255,107,43,0.2);
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800; color: var(--text); line-height: 1.2;
+    letter-spacing: -0.5px; margin-bottom: 1rem;
+  }
+  .section-title .accent { color: var(--saffron); }
+  .section-sub { color: var(--text-light); font-size: 1rem; line-height: 1.7; max-width: 560px; font-family: 'Hind'; }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-sub { margin: 0 auto; }
+
+  /* ── CLIENTS TICKER ── */
+  .clients-strip {
+    background: var(--gray-light); padding: 28px 0; overflow: hidden;
+    border-top: 1px solid #E8ECF4; border-bottom: 1px solid #E8ECF4;
+  }
+  .clients-track {
+    display: flex; gap: 3rem; animation: ticker 22s linear infinite;
+    white-space: nowrap; width: max-content;
+  }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .client-name {
+    font-size: 0.82rem; font-weight: 700; color: var(--gray);
+    letter-spacing: 1px; text-transform: uppercase; flex-shrink: 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .client-name::before { content: '◆'; color: var(--saffron); font-size: 0.5rem; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--off-white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
+  }
+  .service-card {
+    background: white; border-radius: var(--radius); padding: 2rem;
+    box-shadow: var(--shadow-card); transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.04); position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    transform: scaleX(0); transition: var(--transition); transform-origin: left;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,107,43,0.12), rgba(245,166,35,0.12));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+  .service-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.65; font-family: 'Hind'; }
+  .service-price {
+    display: inline-block; margin-top: 1rem; padding: 4px 12px;
+    background: var(--gray-light); border-radius: 50px;
+    font-size: 0.78rem; font-weight: 600; color: var(--blue-mid);
+  }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+  .stag { font-size: 0.72rem; padding: 3px 10px; border-radius: 50px; background: var(--gray-light); color: var(--gray); font-weight: 500; }
+
+  /* ── ABOUT ── */
+  #about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-visual { position: relative; }
+  .about-img-wrap {
+    border-radius: 24px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+    padding: 3rem 2.5rem; min-height: 420px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .about-pattern {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image: radial-gradient(circle, white 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .about-accent {
+    position: absolute; top: -30px; right: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    opacity: 0.3;
+  }
+  .about-year {
+    position: relative; z-index: 2;
+    font-size: 5rem; font-weight: 900; color: white; opacity: 0.15;
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .about-quote {
+    position: relative; z-index: 2;
+    color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; line-height: 1.5;
+    font-style: italic;
+  }
+  .about-quote::before { content: '"'; color: var(--saffron); font-size: 2rem; line-height: 0; }
+  .about-badge-row { display: flex; gap: 1rem; margin-top: 1.5rem; position: relative; z-index: 2; }
+  .abadge {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 10px 14px; text-align: center;
+  }
+  .abadge strong { display: block; font-size: 1.2rem; font-weight: 800; color: var(--saffron-light); }
+  .abadge span { font-size: 0.68rem; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.5px; }
+  .about-content { }
+  .about-content .section-sub { margin-bottom: 1.5rem; }
+  .about-content p { color: var(--text-light); font-size: 0.92rem; line-height: 1.75; font-family: 'Hind'; margin-bottom: 1rem; }
+  .about-features { list-style: none; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.8rem; }
+  .about-features li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.92rem; font-weight: 500; color: var(--text);
+  }
+  .about-features li i { color: var(--saffron); width: 18px; }
+
+  /* ── PORTFOLIO ── */
+  #portfolio { background: var(--blue); padding: 90px 5%; }
+  #portfolio .section-title { color: white; }
+  #portfolio .section-label { background: rgba(255,107,43,0.2); }
+  #portfolio .section-sub { color: rgba(255,255,255,0.6); }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .portfolio-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); overflow: hidden; transition: var(--transition);
+  }
+  .portfolio-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.1); border-color: rgba(255,107,43,0.4); }
+  .portfolio-top {
+    padding: 1.8rem 1.8rem 1rem;
+    background: linear-gradient(135deg, rgba(255,107,43,0.15), rgba(30,95,187,0.15));
+  }
+  .portfolio-category {
+    font-size: 0.7rem; font-weight: 700; color: var(--saffron-light);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem;
+  }
+  .portfolio-client { font-size: 1.05rem; font-weight: 700; color: white; margin-bottom: 0.4rem; }
+  .portfolio-city { font-size: 0.8rem; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 5px; }
+  .portfolio-body { padding: 1rem 1.8rem 1.8rem; }
+  .portfolio-result {
+    display: flex; gap: 1.5rem; margin-bottom: 1rem; padding: 1rem;
+    background: rgba(0,0,0,0.2); border-radius: 10px;
+  }
+  .p-metric { text-align: center; }
+  .p-metric strong { display: block; font-size: 1.3rem; font-weight: 800; color: var(--gold); }
+  .p-metric span { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+  .portfolio-desc { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.6; font-family: 'Hind'; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--off-white); }
+  .testimonial-carousel { position: relative; overflow: hidden; }
+  .testimonial-track {
+    display: flex; gap: 1.5rem;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .testimonial-card {
+    min-width: calc(33.333% - 1rem); background: white;
+    border-radius: var(--radius); padding: 2rem;
+    box-shadow: var(--shadow-card); border: 1px solid rgba(0,0,0,0.04);
+    flex-shrink: 0;
+  }
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .t-text { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; font-family: 'Hind'; margin-bottom: 1.5rem; font-style: italic; }
+  .t-author { display: flex; align-items: center; gap: 12px; }
+  .t-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: white; font-size: 1rem; flex-shrink: 0;
+  }
+  .t-name { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+  .t-role { font-size: 0.75rem; color: var(--gray); }
+  .carousel-controls { display: flex; gap: 0.75rem; margin-top: 2rem; justify-content: center; }
+  .carousel-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 2px solid var(--saffron); background: transparent;
+    color: var(--saffron); cursor: pointer; font-size: 1rem;
+    transition: var(--transition); display: flex; align-items: center; justify-content: center;
+  }
+  .carousel-btn:hover { background: var(--saffron); color: white; }
+  .carousel-dots { display: flex; gap: 8px; align-items: center; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray); cursor: pointer; transition: var(--transition); }
+  .dot.active { background: var(--saffron); width: 24px; border-radius: 4px; }
+
+  /* ── PRICING ── */
+  #pricing { background: white; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .pricing-card {
+    border-radius: var(--radius); padding: 2.5rem 2rem;
+    border: 2px solid var(--gray-light); transition: var(--transition);
+    position: relative; overflow: hidden;
+  }
+  .pricing-card:hover { border-color: var(--saffron); transform: translateY(-4px); box-shadow: var(--shadow); }
+  .pricing-card.popular {
+    border-color: var(--saffron);
+    background: linear-gradient(135deg, rgba(255,107,43,0.04), rgba(245,166,35,0.04));
+  }
+  .popular-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--saffron); color: white; padding: 4px 12px;
+    border-radius: 50px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .plan-name { font-size: 0.8rem; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; }
+  .plan-price { font-size: 2.2rem; font-weight: 900; color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
+  .plan-price span { font-size: 1rem; font-weight: 500; color: var(--gray); }
+  .plan-desc { font-size: 0.85rem; color: var(--text-light); font-family: 'Hind'; margin-bottom: 1.5rem; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+  .plan-features li { font-size: 0.88rem; color: var(--text-light); display: flex; align-items: center; gap: 10px; }
+  .plan-features li i { color: var(--saffron); font-size: 0.75rem; }
+  .plan-features li.disabled { opacity: 0.4; }
+  .plan-features li.disabled i { color: var(--gray); }
+
+  /* ── CONTACT + QUOTE ── */
+  #contact { background: var(--gray-light); }
+  .forms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .form-card {
+    background: white; border-radius: var(--radius); padding: 2.5rem;
+    box-shadow: var(--shadow-card);
+  }
+  .form-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+  .form-card p { color: var(--text-light); font-size: 0.88rem; font-family: 'Hind'; margin-bottom: 1.8rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; padding: 12px 16px;
+    border: 2px solid #E8ECF4; border-radius: var(--radius-sm);
+    font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--text);
+    background: white; transition: var(--transition); outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(255,107,43,0.1); }
+  .form-group textarea { min-height: 110px; resize: vertical; }
+  .phone-input { display: flex; gap: 0; }
+  .phone-prefix {
+    background: var(--gray-light); border: 2px solid #E8ECF4; border-right: none;
+    padding: 12px 14px; border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    font-size: 0.9rem; font-weight: 600; color: var(--text-light);
+    white-space: nowrap; display: flex; align-items: center;
+  }
+  .phone-input input { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .submit-btn {
+    width: 100%; padding: 14px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+    color: white; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 700;
+    border-radius: var(--radius-sm); transition: var(--transition); letter-spacing: 0.3px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,43,0.4); }
+  .submit-btn:active { transform: translateY(0); }
+  .form-success {
+    display: none; text-align: center; padding: 2rem;
+    color: var(--saffron); font-weight: 600;
+  }
+  .form-success i { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue); color: white; padding: 60px 5% 30px;
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+  }
+  .footer-brand p { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.7; font-family: 'Hind'; margin: 1rem 0 1.5rem; }
+  .social-links { display: flex; gap: 10px; }
+  .social-link {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    text-decoration: none; transition: var(--transition);
+  }
+  .social-link:hover { background: var(--saffron); color: white; }
+  .footer-col h4 { font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: var(--transition); font-family: 'Hind'; }
+  .footer-col ul li a:hover { color: var(--saffron-light); padding-left: 4px; }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    gap: 1rem;
+  }
+  .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.8rem; font-family: 'Hind'; }
+  .footer-bottom a { color: var(--saffron-light); text-decoration: none; }
+  .india-flag { display: inline-flex; align-items: center; gap: 6px; }
+  .flag-strip { display: inline-flex; flex-direction: column; width: 20px; height: 14px; border-radius: 2px; overflow: hidden; }
+  .flag-strip span:nth-child(1) { background: #FF9933; flex: 1; }
+  .flag-strip span:nth-child(2) { background: white; flex: 1; }
+  .flag-strip span:nth-child(3) { background: #138808; flex: 1; }
+
+  /* ── BACK TO TOP ── */
+  #backTop {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--saffron); color: white; border: none; cursor: pointer;
+    font-size: 1.1rem; box-shadow: 0 4px 20px rgba(255,107,43,0.4);
+    transition: var(--transition); display: none; align-items: center; justify-content: center;
+  }
+  #backTop.show { display: flex; }
+  #backTop:hover { transform: translateY(-3px); background: var(--saffron-dark); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .testimonial-card { min-width: calc(50% - 0.75rem); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-container { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+    .hero-badge { margin: 0 auto 1.5rem; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .forms-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .testimonial-card { min-width: calc(100%); }
+    .form-row { grid-template-columns: 1fr; }
+    section { padding: 70px 5%; }
+  }
+  @media (max-width: 480px) {
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; justify-content: space-around; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="logo-icon">PP</div>
+    <div class="logo-text">
+      <span>PeakPerform India</span>
+      <span>Digital Growth Agency</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+  <a href="#testimonials" onclick="closeMenu()">Reviews</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#contact" onclick="closeMenu()">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-container">
+    <div class="hero-content fade-up">
+      <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> India's Trusted Marketing Partner</div>
+      <h1 class="hero-title">
+        Grow Your Brand<br>
+        <span class="highlight">Across India</span><br>
+        Digitally
+      </h1>
+      <p class="hero-desc">
+        We help Indian SMEs, startups, and local businesses scale their digital presence with data-driven strategies — in Hindi, English, and beyond.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary"><i class="fas fa-rocket"></i> Start Growing Today</a>
+        <a href="#portfolio" class="btn-secondary"><i class="fas fa-play-circle"></i> View Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">200<span>+</span></div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">₹50<span>Cr+</span></div>
+          <div class="stat-label">Revenue Generated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">8<span>x</span></div>
+          <div class="stat-label">Avg. ROI</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual fade-up">
+      <div class="hero-card-main">
+        <div class="metric-row">
+          <span class="metric-label">Monthly Revenue</span>
+          <span class="metric-change"><i class="fas fa-arrow-up"></i> +143%</span>
+        </div>
+        <div class="metric-value" style="color:white;font-size:1.8rem;font-weight:900;margin-bottom:1rem;">₹12,40,000</div>
+        <div class="chart-bars">
+          <div class="bar" style="height:35%"></div>
+          <div class="bar blue" style="height:50%"></div>
+          <div class="bar" style="height:42%"></div>
+          <div class="bar blue" style="height:65%"></div>
+          <div class="bar" style="height:55%"></div>
+          <div class="bar blue" style="height:72%"></div>
+          <div class="bar" style="height:68%"></div>
+          <div class="bar" style="height:85%"></div>
+          <div class="bar blue" style="height:78%"></div>
+          <div class="bar" style="height:100%"></div>
+        </div>
+        <div class="metric-row" style="margin-top:1rem;margin-bottom:0">
+          <span class="metric-label">Organic Traffic</span>
+          <span class="metric-change"><i class="fas fa-arrow-up"></i> +312%</span>
+        </div>
+        <div class="floating-tag t1">
+          <div class="tag-icon" style="background:#FFF3E0"><span>🎯</span></div>
+          <div><strong style="display:block;font-size:0.85rem">₹2.10 CPC</strong><span style="color:#8A95A5;font-size:0.7rem">vs ₹8.40 avg</span></div>
+        </div>
+        <div class="floating-tag t2">
+          <div class="tag-icon" style="background:#E8F5E9"><span>📈</span></div>
+          <div><strong style="display:block;font-size:0.85rem">8.4x ROAS</strong><span style="color:#8A95A5;font-size:0.7rem">Meta Ads</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS TICKER -->
+<div class="clients-strip">
+  <div class="clients-track" id="clientsTrack">
+    <span class="client-name">Mumbai Retail Chain</span>
+    <span class="client-name">Delhi Tech Startup</span>
+    <span class="client-name">Bangalore SaaS Co.</span>
+    <span class="client-name">Pune Fashion Brand</span>
+    <span class="client-name">Hyderabad Pharma</span>
+    <span class="client-name">Chennai Real Estate</span>
+    <span class="client-name">Ahmedabad FMCG</span>
+    <span class="client-name">Kolkata Jewellers</span>
+    <span class="client-name">Jaipur Handicrafts</span>
+    <span class="client-name">Surat Textiles</span>
+    <span class="client-name">Mumbai Retail Chain</span>
+    <span class="client-name">Delhi Tech Startup</span>
+    <span class="client-name">Bangalore SaaS Co.</span>
+    <span class="client-name">Pune Fashion Brand</span>
+    <span class="client-name">Hyderabad Pharma</span>
+    <span class="client-name">Chennai Real Estate</span>
+    <span class="client-name">Ahmedabad FMCG</span>
+    <span class="client-name">Kolkata Jewellers</span>
+    <span class="client-name">Jaipur Handicrafts</span>
+    <span class="client-name">Surat Textiles</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Services Designed for <span class="accent">Indian Businesses</span></h2>
+      <p class="section-sub">From social media to performance campaigns — we speak your market's language, literally and figuratively.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">📱</div>
+        <h3>Social Media Management</h3>
+        <p>Full-stack Instagram, Facebook & YouTube management with platform-native content strategies for Indian audiences, festivals, and trends.</p>
+        <div class="service-tags"><span class="stag">Instagram</span><span class="stag">Facebook</span><span class="stag">YouTube</span><span class="stag">LinkedIn</span></div>
+        <div class="service-price">From ₹15,000/month</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">✍️</div>
+        <h3>Content Creation (Hindi + English)</h3>
+        <p>Bilingual content including reels, posts, blogs, and video scripts crafted by native creators who understand Hinglish culture.</p>
+        <div class="service-tags"><span class="stag">Reels</span><span class="stag">Blogs</span><span class="stag">Copywriting</span></div>
+        <div class="service-price">From ₹12,000/month</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🔍</div>
+        <h3>SEO (Local & National)</h3>
+        <p>Rank on Google for "near me" searches across Indian cities. Technical SEO, local citations, and content that drives organic traffic.</p>
+        <div class="service-tags"><span class="stag">On-Page SEO</span><span class="stag">Link Building</span><span class="stag">Local SEO</span></div>
+        <div class="service-price">From ₹18,000/month</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🎯</div>
+        <h3>PPC & Performance Campaigns</h3>
+        <p>Google Ads, Meta Ads & YouTube campaigns optimised for INR budgets with ₹2-5 CPC strategies built for competitive Indian markets.</p>
+        <div class="service-tags"><span class="stag">Google Ads</span><span class="stag">Meta Ads</span><span class="stag">YouTube Ads</span></div>
+        <div class="service-price">From ₹20,000/month + spend</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📧</div>
+        <h3>Email & WhatsApp Marketing</h3>
+        <p>High-open-rate campaigns via email and WhatsApp Business API — the preferred channels of Indian consumers for promotions and support.</p>
+        <div class="service-tags"><span class="stag">WhatsApp API</span><span class="stag">Email Sequences</span><span class="stag">SMS</span></div>
+        <div class="service-price">From ₹8,000/month</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📊</div>
+        <h3>Analytics & Reporting</h3>
+        <p>Monthly ROI reports in plain language — no jargon. We track what matters: leads generated, cost per acquisition, and actual revenue impact.</p>
+        <div class="service-tags"><span class="stag">GA4</span><span class="stag">Meta Insights</span><span class="stag">Custom Dashboards</span></div>
+        <div class="service-price">Included in all plans</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual fade-up">
+        <div class="about-img-wrap">
+          <div class="about-pattern"></div>
+          <div class="about-accent"></div>
+          <div class="about-year">2018</div>
+          <p class="about-quote">We don't just market — we understand the <em>bhavana</em> (emotion) behind every Indian consumer decision.</p>
+          <div class="about-badge-row">
+            <div class="abadge"><strong>200+</strong><span>Clients Served</span></div>
+            <div class="abadge"><strong>6+</strong><span>Years in India</span></div>
+            <div class="abadge"><strong>15+</strong><span>Cities Covered</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content fade-up">
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">Born in India,<br>Built for <span class="accent">Indian Markets</span></h2>
+        <p>Founded in 2018, PeakPerform India was built by marketers who were frustrated by agencies that applied Western playbooks to Indian audiences — and failed.</p>
+        <p>We understand that your customer from Surat is different from your customer in Shillong. We build campaigns that resonate across languages, cultures, and socioeconomic contexts — from Tier-1 metros to Tier-3 towns.</p>
+        <p>Our team of 25+ specialists includes performance marketers, Hindi & regional content writers, UX designers, and data analysts — all focused on one thing: measurable ROI for Indian businesses.</p>
+        <ul class="about-features">
+          <li><i class="fas fa-check-circle"></i> Google Partner & Meta Business Partner certified</li>
+          <li><i class="fas fa-check-circle"></i> Campaigns in Hindi, English, Marathi, Tamil & Telugu</li>
+          <li><i class="fas fa-check-circle"></i> Specialised in Indian festive season marketing (Diwali, Holi, etc.)</li>
+          <li><i class="fas fa-check-circle"></i> In-house WhatsApp Business API integration team</li>
+          <li><i class="fas fa-check-circle"></i> Transparent monthly reporting with zero hidden costs</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-flex"><i class="fas fa-handshake"></i> Let's Talk Strategy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Case Studies</span>
+      <h2 class="section-title" style="color:white">Real Results for <span class="accent">Real Indian Businesses</span></h2>
+      <p class="section-sub">From Mumbai to Bangalore, here's how we've helped brands grow.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-top">
+          <div class="portfolio-category">E-Commerce · Meta Ads</div>
+          <div class="portfolio-client">Mumbai Fashion Boutique</div>
+          <div class="portfolio-city"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-result">
+            <div class="p-metric"><strong>₹4.2Cr</strong><span>Revenue in 6mo</span></div>
+            <div class="p-metric"><strong>8.7x</strong><span>ROAS</span></div>
+            <div class="p-metric"><strong>-62%</strong><span>Cost/Sale</span></div>
+          </div>
+          <p class="portfolio-desc">Launched localised Instagram + Facebook campaigns targeting Mumbai's fashion-conscious millennials. Leveraged UGC content and festive offers during Navratri and Dussehra.</p>
+        </div>
+      </div>
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-top">
+          <div class="portfolio-category">SaaS · SEO + Content</div>
+          <div class="portfolio-client">Bengaluru B2B SaaS Startup</div>
+          <div class="portfolio-city"><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</div>
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-result">
+            <div class="p-metric"><strong>3,200%</strong><span>Organic Growth</span></div>
+            <div class="p-metric"><strong>850+</strong><span>Demo Leads</span></div>
+            <div class="p-metric"><strong>#1</strong><span>Google Rank</span></div>
+          </div>
+          <p class="portfolio-desc">Built a 100-article SEO content hub targeting SME decision-makers. Grew from 800 to 26,000 monthly organic visitors in 9 months, resulting in 850+ qualified demo bookings.</p>
+        </div>
+      </div>
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-top">
+          <div class="portfolio-category">Real Estate · Google Ads</div>
+          <div class="portfolio-client">Delhi NCR Property Developer</div>
+          <div class="portfolio-city"><i class="fas fa-map-marker-alt"></i> Noida, Uttar Pradesh</div>
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-result">
+            <div class="p-metric"><strong>₹920</strong><span>Cost per Lead</span></div>
+            <div class="p-metric"><strong>1,240</strong><span>Leads/month</span></div>
+            <div class="p-metric"><strong>22x</strong><span>ROI</span></div>
+          </div>
+          <p class="portfolio-desc">Overhauled Google Search and Display campaigns targeting NRI investors and Tier-2 buyers. Reduced cost-per-lead from ₹4,200 to ₹920 through hyper-local ad targeting.</p>
+        </div>
+      </div>
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-top">
+          <div class="portfolio-category">Food & Beverage · Social Media</div>
+          <div class="portfolio-client">Pune Cloud Kitchen Chain</div>
+          <div class="portfolio-city"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+        </div>
+        <div class="portfolio-body">
+          <div class="portfolio-result">
+            <div class="p-metric"><strong>5 → 18</strong><span>Outlets Opened</span></div>
+            <div class="p-metric"><strong>180%</strong><span>Order Growth</span></div>
+            <div class="p-metric"><strong>92K</strong><span>Instagram Followers</span></div>
+          </div>
+          <p class="portfolio-desc">Built a full Instagram and Zomato content strategy with food reels, influencer micro-partnerships, and Swiggy campaign integrations. Grew from 5 to 18 outlets in 14 months.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <span class="section-label">Client Reviews</span>
+      <h2 class="section-title">What Indian Businesses <span class="accent">Say About Us</span></h2>
+    </div>
+    <div class="testimonial-carousel fade-up">
+      <div class="testimonial-track" id="testimonialTrack">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"PeakPerform transformed our Diwali campaign. Our online sales went from ₹8 lakhs to ₹38 lakhs in one season. They truly understand the Indian consumer mindset."</p>
+          <div class="t-author">
+            <div class="t-avatar">RK</div>
+            <div><div class="t-name">Rajesh Kulkarni</div><div class="t-role">Founder, Kulkarni Jewellers · Pune</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"Hamare SEO traffic mein 400% ki growth aayi. PeakPerform ne Hindi content strategy se hamari website ko Google pe #1 rank dilaya. Bahut accha kaam!"</p>
+          <div class="t-author">
+            <div class="t-avatar">PS</div>
+            <div><div class="t-name">Priya Sharma</div><div class="t-role">Director, SharmaTech Solutions · Delhi</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"Best ROI we've seen from any agency. Our Google Ads cost per lead dropped by 65% and our pipeline doubled in 3 months. Highly recommend for B2B companies."</p>
+          <div class="t-author">
+            <div class="t-avatar">AM</div>
+            <div><div class="t-name">Arjun Mehta</div><div class="t-role">CEO, Mehta Logistics Ltd · Mumbai</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"Their WhatsApp marketing campaigns gave us a 45% open rate — far better than email. PeakPerform knows what works for Indian consumers. Excellent team."</p>
+          <div class="t-author">
+            <div class="t-avatar">SN</div>
+            <div><div class="t-name">Sunita Nair</div><div class="t-role">Owner, Nair Organic Store · Chennai</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="t-text">"We expanded from Ahmedabad to 5 cities in Gujarat with PeakPerform's hyper-local ad strategy. Their understanding of regional nuances is unmatched."</p>
+          <div class="t-author">
+            <div class="t-avatar">VP</div>
+            <div><div class="t-name">Vijay Patel</div><div class="t-role">MD, Patel Industries · Ahmedabad</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls fade-up">
+      <button class="carousel-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <span class="section-label">Transparent Pricing</span>
+      <h2 class="section-title">Plans for Every <span class="accent">Indian Business</span></h2>
+      <p class="section-sub">All pricing in Indian Rupees. No hidden charges, no foreign exchange surprises.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">₹25,000 <span>/ month</span></div>
+        <p class="plan-desc">Perfect for small businesses and local shops taking their first digital steps.</p>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Social Media Management (2 platforms)</li>
+          <li><i class="fas fa-check"></i> 12 posts/month (Hindi + English)</li>
+          <li><i class="fas fa-check"></i> Basic SEO setup</li>
+          <li><i class="fas fa-check"></i> Monthly performance report</li>
+          <li><i class="fas fa-check"></i> WhatsApp support</li>
+          <li class="disabled"><i class="fas fa-times"></i> PPC Campaign Management</li>
+          <li class="disabled"><i class="fas fa-times"></i> Email Marketing</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center;text-decoration:none">Get Started</a>
+      </div>
+      <div class="pricing-card popular fade-up">
+        <div class="popular-badge">🔥 Most Popular</div>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">₹55,000 <span>/ month</span></div>
+        <p class="plan-desc">Best for growing SMEs and startups ready to scale across digital channels.</p>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Social Media (4 platforms)</li>
+          <li><i class="fas fa-check"></i> 25 posts/month (bilingual)</li>
+          <li><i class="fas fa-check"></i> Full SEO + 4 blog articles</li>
+          <li><i class="fas fa-check"></i> Google + Meta Ads (up to ₹1L spend)</li>
+          <li><i class="fas fa-check"></i> Email marketing campaigns</li>
+          <li><i class="fas fa-check"></i> Monthly strategy call</li>
+          <li><i class="fas fa-check"></i> Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center;text-decoration:none">Get Started</a>
+      </div>
+      <div class="pricing-card fade-up">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">₹1,20,000 <span>/ month</span></div>
+        <p class="plan-desc">For established brands seeking aggressive growth across all digital channels.</p>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Full-funnel digital marketing</li>
+          <li><i class="fas fa-check"></i> Unlimited content creation</li>
+          <li><i class="fas fa-check"></i> Advanced SEO + PR coverage</li>
+          <li><i class="fas fa-check"></i> Performance ads (unlimited spend)</li>
+          <li><i class="fas fa-check"></i> WhatsApp API integration</li>
+          <li><i class="fas fa-check"></i> Custom analytics dashboard</li>
+          <li><i class="fas fa-check"></i> Weekly strategy reviews</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center;text-decoration:none">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT + QUOTE -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Let's Grow Your Business <span class="accent">Together</span></h2>
+      <p class="section-sub">Fill in the form and our team will contact you within 24 hours.</p>
+    </div>
+    <div class="forms-grid">
+      <!-- Contact Form -->
+      <div class="form-card fade-up">
+        <h3>📬 Send Us a Message</h3>
+        <p>Have questions? Want to discuss your marketing goals? Drop us a message.</p>
+        <form id="contactForm" action="https://formsubmit.co/el/husuge" method="POST">
+          <input type="hidden" name="_subject" value="New Contact Message - PeakPerform India">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c_name">Full Name *</label>
+              <input type="text" id="c_name" name="name" placeholder="Rahul Gupta" required>
+            </div>
+            <div class="form-group">
+              <label for="c_email">Email Address *</label>
+              <input type="email" id="c_email" name="email" placeholder="rahul@business.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c_phone">Phone Number *</label>
+            <div class="phone-input">
+              <span class="phone-prefix">🇮🇳 +91</span>
+              <input type="tel" id="c_phone" name="phone" placeholder="98765 43210" pattern="[6-9][0-9]{9}" maxlength="10" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c_business">Business Name</label>
+            <input type="text" id="c_business" name="business" placeholder="Your Company Pvt. Ltd.">
+          </div>
+          <div class="form-group">
+            <label for="c_msg">Your Message *</label>
+            <textarea id="c_msg" name="message" placeholder="Tell us about your business and marketing goals..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+
+      <!-- Quote Form -->
+      <div class="form-card fade-up">
+        <h3>🚀 Get a Free Quote</h3>
+        <p>Tell us your requirements and budget range, and we'll craft a custom proposal within 24 hours.</p>
+        <form id="quoteForm" action="https://formsubmit.co/el/husuge" method="POST">
+          <input type="hidden" name="_subject" value="New Quote Request - PeakPerform India">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="q_name">Your Name *</label>
+              <input type="text" id="q_name" name="name" placeholder="Priya Sharma" required>
+            </div>
+            <div class="form-group">
+              <label for="q_email">Email Address *</label>
+              <input type="email" id="q_email" name="email" placeholder="priya@startup.in" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="q_phone">Phone Number *</label>
+            <div class="phone-input">
+              <span class="phone-prefix">🇮🇳 +91</span>
+              <input type="tel" id="q_phone" name="phone" placeholder="99001 23456" pattern="[6-9][0-9]{9}" maxlength="10" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="q_service">Service Interested In *</label>
+            <select id="q_service" name="service" required>
+              <option value="">— Select a Service —</option>
+              <option>Social Media Management</option>
+              <option>Content Creation (Hindi + English)</option>
+              <option>SEO (Local & National)</option>
+              <option>PPC & Performance Campaigns</option>
+              <option>Email & WhatsApp Marketing</option>
+              <option>Full-Package Digital Marketing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="q_budget">Monthly Budget (INR) *</label>
+            <select id="q_budget" name="budget" required>
+              <option value="">— Select Budget Range —</option>
+              <option>Less than ₹25,000</option>
+              <option>₹25,000 – ₹50,000</option>
+              <option>₹50,000 – ₹1,00,000</option>
+              <option>₹1,00,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="q_goals">Business Goals</label>
+            <textarea id="q_goals" name="goals" placeholder="e.g. Increase leads, grow Instagram following, launch in new cities..." style="min-height:85px"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Request Free Quote <i class="fas fa-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div style="max-width:1200px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
+      <div style="background:white;border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:1rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,107,43,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">📞</div>
+        <div><div style="font-size:0.75rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:1px">Call Us</div><div style="font-weight:700;color:var(--text);margin-top:2px">+91 98765 43210</div></div>
+      </div>
+      <div style="background:white;border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:1rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,107,43,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">📧</div>
+        <div><div style="font-size:0.75rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:1px">Email Us</div><div style="font-weight:700;color:var(--text);margin-top:2px">hello@peakperform.in</div></div>
+      </div>
+      <div style="background:white;border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:1rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,107,43,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">💬</div>
+        <div><div style="font-size:0.75rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:1px">WhatsApp</div><div style="font-weight:700;color:var(--text);margin-top:2px">+91 98765 43210</div></div>
+      </div>
+      <div style="background:white;border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:1rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,107,43,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🕐</div>
+        <div><div style="font-size:0.75rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:1px">Working Hours</div><div style="font-weight:700;color:var(--text);margin-top:2px">Mon–Sat, 10AM – 7PM IST</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="nav-logo" style="margin-bottom:1rem;display:inline-flex">
+        <div class="logo-icon">PP</div>
+        <div class="logo-text">
+          <span>PeakPerform India</span>
+          <span>Digital Growth Agency</span>
+        </div>
+      </a>
+      <p>India's trusted digital marketing partner for SMEs, startups and local businesses. We grow your brand with data-driven strategies built for the Indian market.</p>
+      <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Social Media Management</a></li>
+        <li><a href="#services">Content Creation</a></li>
+        <li><a href="#services">SEO Services</a></li>
+        <li><a href="#services">PPC Campaigns</a></li>
+        <li><a href="#services">Email Marketing</a></li>
+        <li><a href="#services">Analytics & Reporting</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#portfolio">Case Studies</a></li>
+        <li><a href="#testimonials">Client Reviews</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><a href="mailto:hello@peakperform.in">hello@peakperform.in</a></li>
+        <li><a href="#">Mumbai, India 400001</a></li>
+        <li><a href="#">Mon–Sat: 10AM–7PM IST</a></li>
+        <li><a href="#">Google Partner Certified</a></li>
+        <li><a href="#">Meta Business Partner</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 PeakPerform India. All rights reserved. | Proudly <span class="india-flag"><span class="flag-strip"><span></span><span></span><span></span></span> Made in India</span></p>
+    <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Sitemap</a></p>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  // NAV SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+    const bt = document.getElementById('backTop');
+    bt.classList.toggle('show', window.scrollY > 400);
+  });
+
+  // MOBILE MENU
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // CAROUSEL
+  let currentSlide = 0;
+  const track = document.getElementById('testimonialTrack');
+  const cards = track.querySelectorAll('.testimonial-card');
+  const dotsContainer = document.getElementById('carouselDots');
+  let visibleCount = 3;
+
+  function getVisible() {
+    if (window.innerWidth <= 768) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 3;
+  }
+
+  function buildDots() {
+    visibleCount = getVisible();
+    const total = Math.ceil(cards.length / visibleCount);
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goSlide(i);
+      dotsContainer.appendChild(d);
+    }
+  }
+
+  function goSlide(n) {
+    visibleCount = getVisible();
+    const maxSlide = Math.ceil(cards.length / visibleCount) - 1;
+    currentSlide = Math.max(0, Math.min(n, maxSlide));
+    const cardWidth = track.parentElement.offsetWidth;
+    track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+    dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  }
+
+  function nextSlide() {
+    visibleCount = getVisible();
+    const max = Math.ceil(cards.length / visibleCount) - 1;
+    goSlide(currentSlide < max ? currentSlide + 1 : 0);
+  }
+  function prevSlide() {
+    visibleCount = getVisible();
+    const max = Math.ceil(cards.length / visibleCount) - 1;
+    goSlide(currentSlide > 0 ? currentSlide - 1 : max);
+  }
+
+  buildDots();
+  window.addEventListener('resize', () => { buildDots(); goSlide(0); });
+  setInterval(nextSlide, 5000);
+
+  // FADE IN ON SCROLL
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // PHONE VALIDATION (+91)
+  document.querySelectorAll('input[type=tel]').forEach(input => {
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+  });
+
+  // SMOOTH LINKS
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
